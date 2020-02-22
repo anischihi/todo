@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+// One Module can contain many classes
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
