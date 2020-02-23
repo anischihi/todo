@@ -10,7 +10,7 @@ export class LoginComponent implements OnInit {
 
   username: string = '';
   password: string = '';
-  errorMessage: string = 'The following credentials, username = [' + this.username + '] password= [' + this.password + '] are invalid';
+  errorMessage: string = 'Wrong Credentials';
   invalidLogin: boolean = false;
 
   constructor(private router: Router) { }

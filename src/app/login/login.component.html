@@ -1,9 +1,30 @@
 <!-- UserName: {{username}}<br> -->
-<small *ngIf='invalidLogin'>{{errorMessage}}</small>
+<!-- <small *ngIf='invalidLogin'>{{errorMessage}}</small>
 
 <div></div>
 
 User Name : <input type="text" name="u" [(ngModel)]="username"> <br>
 Password: <input type="password" name="password" [(ngModel)]="password">
 
-<button (click)=handleLogin()>Login</button>
+<button (click)=handleLogin()>Login</button> -->
+<div class="login-page">
+    <div class="form">
+        <!-- <form class="register-form">
+        <input type="text" placeholder="name"/>
+        <input type="password" placeholder="password"/>
+        <input type="text" placeholder="email address"/>
+        <button>create</button>
+        <p class="message">Already registered? <a href="#">Sign In</a></p>
+        </form> -->
+        <form class="login-form">
+        <input type="text" placeholder="username" name="username" [(ngModel)]="username" >
+        <input type="password" placeholder="password" name="password" [(ngModel)]="password">
+        <button (click)=handleLogin()>Login</button>
+        <p class="message">Not registered? <a href="#">Create an account</a></p>
+        <p class="error" *ngIf='invalidLogin'>{{errorMessage}}</p>
+        </form>
+    </div>
+</div>
+
+
+
