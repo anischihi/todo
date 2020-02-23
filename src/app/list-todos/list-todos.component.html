@@ -1,0 +1,15 @@
+<table border="1">
+    <caption>My Todos</caption>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let todoObject of todos">
+          <td>{{todoObject.id}}</td>
+          <td>{{todoObject.description}}</td>  
+        </tr>
+    </tbody>
+</table>

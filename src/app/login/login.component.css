@@ -53,8 +53,11 @@
   text-decoration: none;
 }
 .form .error {
-  color: #4CAF50;
+  color: gray;
   text-decoration: none;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px; 
 }
 .form .register-form {
   display: none;
@@ -100,5 +103,7 @@ body {
   background: linear-gradient(to left, #76b852, #8DC26F);
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;      
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;   
+  margin: 0;
 }
