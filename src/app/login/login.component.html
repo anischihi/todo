@@ -1,22 +1,18 @@
 <!-- UserName: {{username}}<br> -->
-<body>
-<div class="login-page">
-    <div class="form">
-        <!-- <form class="register-form">
+<h1>Login</h1>
+<div class="container">
+    <!-- <form class="register-form">
         <input type="text" placeholder="name"/>
         <input type="password" placeholder="password"/>
         <input type="text" placeholder="email address"/>
         <button>create</button>
         <p class="message">Already registered? <a href="#">Sign In</a></p>
         </form> -->
-        <form class="login-form">
-        Username <input type="text" placeholder="username" name="username" [(ngModel)]="username" >
-        Password <input type="password" placeholder="password" name="password" [(ngModel)]="password">
-        <button (click)=handleLogin()>Login</button>
-        <p class="error" *ngIf='invalidLogin'>{{errorMessage}}</p>
-        </form>
+
+    <div>
+        Username <input type="text" placeholder="username" name="username" [(ngModel)]="username"> Password <input type="password" placeholder="password" name="password" [(ngModel)]="password">
+        <button type="button" class="btn btn-outline-success" (click)=handleLogin()>Login</button>
     </div>
+    <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
+
 </div>
-</body>
-
-

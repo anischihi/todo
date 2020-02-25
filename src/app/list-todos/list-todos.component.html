@@ -1,22 +1,19 @@
-<body>
-    <!--for demo wrap-->
-    <h1>My Todos</h1>
-    <div class="tbl-header">
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Description</th>
-                    <th>Target Date</th>
-                    <th>Is Completed ?</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let todoObject of todos">
-                    <td>{{todoObject.description}}</td>
-                    <td>{{todoObject.targetDate | date}}</td>
-                    <td>{{todoObject.done}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</body>
+<h1>My Todos</h1>
+<div class="container">
+    <table class="table" border="1">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Target Date</th>
+                <th>Is Completed ?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let todoObject of todos">
+                <td>{{todoObject.description}}</td>
+                <td>{{todoObject.targetDate | date}}</td>
+                <td>{{todoObject.done}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
