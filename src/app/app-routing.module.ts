@@ -4,13 +4,16 @@ import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ErrorComponent } from './error/error.component';
 import { ListTodosComponent } from './list-todos/list-todos.component';
+import { LogoutComponent } from './logout/logout.component';
+import { RouteGuardService } from './service/route-guard.service';
 
 // welcome
 const routes: Routes = [
-  {path:'todos', component: ListTodosComponent},
+  {path:'todos', component: ListTodosComponent,canActivate:[RouteGuardService]},
   {path:'', component: LoginComponent},
-  {path:'welcome/:name', component: WelcomeComponent},
+  {path:'welcome/:name', component: WelcomeComponent,canActivate:[RouteGuardService]}, // activates route only if canActivate returns true
   {path:'login', component: LoginComponent},
+  {path:'logout', component: LogoutComponent,canActivate:[RouteGuardService]},
   {path:'**', component: ErrorComponent}
 ];
 
