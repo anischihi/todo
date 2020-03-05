@@ -2,3 +2,12 @@
 <div class="container">
     You can manage your todos <a routerLink="/todos">here</a>
 </div>
+<div class="container"> 
+<button type="button" class="btn btn-outline-success" (click)=getWelcomeMessageWithPathVariable()>SpringBootCall</button>
+</div>
+<div class="container">
+    <h2>Welcome message from service = {{responseMessage}} </h2> 
+</div>
+<div class="container">
+    <h2>Error Message = {{errorMessage}} </h2> 
+</div>
