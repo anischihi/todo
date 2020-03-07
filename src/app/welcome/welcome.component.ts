@@ -11,7 +11,6 @@ import { WelcomeDataService, HelloWorldBean } from '../service/data/welcome-data
 
 
 
-
 export class WelcomeComponent implements OnInit {
  message: string = "Hello This is a String";
  name: string ="AnisChihi"; 
