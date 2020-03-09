@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoDataService } from '../service/data/todo-data.service';
+import { Router } from '@angular/router';
 
 
 export class Todo {
@@ -26,7 +27,7 @@ export class ListTodosComponent implements OnInit {
   infoMessage: string;
 
 
-  constructor(private todoService: TodoDataService) { }
+  constructor(private todoService: TodoDataService, private router: Router) { }
 
   ngOnInit(): void { 
     this.refreshTodos()
@@ -37,7 +38,7 @@ export class ListTodosComponent implements OnInit {
     this.todos = response;
   }
 
-  deleteToDoById(id: number,username: string){
+  deleteTodoById(id: number,username: string){
     this.todoService.deleteTodo(id,username).subscribe(
       response=>{
         this.infoMessage=`Todo ${id} of ${username} was deleted successfully`;
@@ -50,5 +51,8 @@ export class ListTodosComponent implements OnInit {
     this.todoService.retrieveAllTodos(this.name).subscribe(
       response => this.readTodosFrom(response));
   }  
+  updateTodoById(id: number,username: string){
+    this.router.navigate(['todos',id])
+    }
 
 }
