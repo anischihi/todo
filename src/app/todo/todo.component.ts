@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoDataService } from '../service/data/todo-data.service';
 import { Todo } from '../list-todos/list-todos.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-todo',
@@ -11,27 +11,48 @@ import { ActivatedRoute } from '@angular/router';
 export class TodoComponent implements OnInit {
 
   todo: Todo;
-  todoId: number;
-  username: string
+  viewUsername: string;
+  viewId: number;
 
-  constructor(private todoDataService: TodoDataService,private route: ActivatedRoute) { }
+  constructor(private todoDataService: TodoDataService, private route: ActivatedRoute, private router: Router) { }
 
 
   ngOnInit(): void {
-    this.username =sessionStorage.getItem('authenticatedUser');
-    this.todoId = this.route.snapshot.params['id']
-    this.todo = new Todo(1,'','',false,new Date)
-    this.todoDataService.retrieveTodo(this.todoId,this.username).subscribe(
-      response => {
-        this.todo =response
-        console.log(this.todo.description)
-      }
-
-    )
+    this.viewId = this.route.snapshot.params['id']
+    this.viewUsername = sessionStorage.getItem('authenticatedUser');
+    this.todo = Todo.getDummyTodo(this.viewId,this.viewUsername);
+    if(this.viewId!=-1){
+    this.retrieveTodoFromServer();
+    }  
   }
-
-  saveTodo(){
-    console.log("save todo")
+  
+  saveTodo(id: number, username: string, newTodo: Todo) {
+    
+    if(this.viewId!=-1){
+      this.updateTodo(id, username, newTodo);
+    }
+    else{
+      this.createTodo(username, newTodo);
+    }
   }
-
+  
+   private createTodo(username: string, newTodo: Todo) {
+    this.todoDataService.createTodo(username, newTodo).subscribe(response => {
+      console.log(response);
+      this.router.navigate(['todos']);
+    });
+  }
+  
+  private updateTodo(id: number, username: string, newTodo: Todo) {
+    this.todoDataService.updateTodo(id, username, newTodo).subscribe(response => {
+      console.log(response);
+      this.router.navigate(['todos']);
+    });
+  }
+  
+    private retrieveTodoFromServer() {
+      this.todoDataService.retrieveTodo(this.viewId, this.viewUsername).subscribe(response => {
+        this.todo = response;
+      });
+    }
 }

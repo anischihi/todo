@@ -9,9 +9,10 @@ export class Todo {
     public description: string,
     public username: string,
     public done: boolean,
-    public targetDate: Date 
-  ){
+    public targetDate: Date
+  ) {
   }
+  public static getDummyTodo(id, username) { return new Todo(id, '', username, false, new Date); }
 }
 
 
@@ -29,30 +30,34 @@ export class ListTodosComponent implements OnInit {
 
   constructor(private todoService: TodoDataService, private router: Router) { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.refreshTodos()
-   }
+  }
 
+
+  deleteTodoById(id: number, username: string) {
+    this.todoService.deleteTodo(id, username).subscribe(
+      response => {
+        this.infoMessage = `Todo ${id} of ${username} was deleted successfully`;
+        console.log(response);
+        this.refreshTodos();
+      }
+    )
+  }
+  refreshTodos() {
+    this.todoService.retrieveAllTodos(this.name).subscribe(
+      response => this.readTodosFrom(response));
+  }
+  updateTodoById(id: number, username: string) {
+    this.router.navigate(['todos', id])
+  }
+
+  addTodo() {
+    this.router.navigate(['todos', -1])
+  }
 
   readTodosFrom(response: Todo[]): void {
     this.todos = response;
   }
-
-  deleteTodoById(id: number,username: string){
-    this.todoService.deleteTodo(id,username).subscribe(
-      response=>{
-        this.infoMessage=`Todo ${id} of ${username} was deleted successfully`;
-        console.log(response);
-        this.refreshTodos();
-      }
-      )
-    }
-  refreshTodos(){
-    this.todoService.retrieveAllTodos(this.name).subscribe(
-      response => this.readTodosFrom(response));
-  }  
-  updateTodoById(id: number,username: string){
-    this.router.navigate(['todos',id])
-    }
 
 }
