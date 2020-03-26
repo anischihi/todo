@@ -2,15 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import { utf8Encode } from '@angular/compiler/src/util';
-import { API_URL } from '../app.constants';
+import { API_URL, AUTHENTICATED_USER, TOKEN } from '../app.constants';
 
 
-export const TOKEN ='token';
-export const AUTHENTICATED_USER='authenticatedUser';
+
 @Injectable({
   providedIn: 'root'
 })
-export class BasicAuthenticationService {
+export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
@@ -25,6 +24,20 @@ export class BasicAuthenticationService {
         sessionStorage.setItem(AUTHENTICATED_USER,username);
         sessionStorage.setItem(TOKEN,basicAuthHeaderString);
         return data;
+      }
+    ))
+  }
+
+  executeJwtAuthenticationService(username: string, password: string) {
+
+    return this.http.post<any>(`${API_URL}/authenticate`,{
+      username: username,
+      password:password
+    }).pipe(map(
+      response=>{
+        sessionStorage.setItem(AUTHENTICATED_USER,username);
+        sessionStorage.setItem(TOKEN,`Bearer ${response.token}`);
+        return response;
       }
     ))
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoDataService } from '../service/data/todo-data.service';
 import { Router } from '@angular/router';
+import { AUTHENTICATED_USER } from '../app.constants';
 
 
 export class Todo {
@@ -24,7 +25,6 @@ export class Todo {
 export class ListTodosComponent implements OnInit {
 
   todos: Todo[];
-  name: string = "anis";
   infoMessage: string;
 
 
@@ -45,7 +45,7 @@ export class ListTodosComponent implements OnInit {
     )
   }
   refreshTodos() {
-    this.todoService.retrieveAllTodos(this.name).subscribe(
+    this.todoService.retrieveAllTodos(sessionStorage.getItem(AUTHENTICATED_USER)).subscribe(
       response => this.readTodosFrom(response));
   }
   updateTodoById(id: number, username: string) {
